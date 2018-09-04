@@ -1,0 +1,12 @@
+node_modules
+bower_components
+migrations
+__pycache__
+*.pyc
+bin
+obj
+*.db
+*.sqlite3
+.vscode
+.DS_Store
+room_service/static/card_images

@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            <form action="{% url 'room_service:logout' %}" method="get">
+                <input type="submit" value="Logout">
+            </form>
+            <form action="{% url 'room_service:room_create' %}" method="get">
+                <input type="submit" value="Create Room">
+            </form>
+        {% else %}
+            <form action="{% url 'room_service:login' %}" method="get">
+                <input type="submit" value="Login">
+            </form>
+            <form action="{% url 'room_service:register' %}" method="get">
+                <input type="submit" value="Register">
+            </form>
+        {% endif %}
+    </nav>
+
+    {% block content %}
+        <h1>Welcome to Sector 86</h1>
+        {% if user.is_authenticated %}
+            <p>Yup!</p>
+        {% endif %}
+    {% endblock %}
+</body>
+</html>
