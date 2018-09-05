@@ -1,9 +1,11 @@
-
 $.ajax('/card/').then(card_list => {
     let library_list = []
     let face_down_cards = []
+    let drawn_cards = []
+    let discarded_cards = []
     card_list.forEach(card => {
         for (i = 0; i < card.quantity; i++) {
+
             library_list.push({'name': card.name, 'image': card.image, 'card_type': card.card_type})
         }
     })
@@ -28,7 +30,7 @@ $.ajax('/card/').then(card_list => {
                 $('#drawn-cards-area').append(`
                     <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/${library_list[0]["image"]}' alt='${library_list[0]["name"]}' class="drawn card ${library_list[0]["card_type"]}" />
                 `)
-                library_list.shift()
+                drawn_cards.push(library_list.shift())
             }
             else if ($(e.target).hasClass('face-down')) {
                 $('#drawn-cards-area').append(`
@@ -37,14 +39,44 @@ $.ajax('/card/').then(card_list => {
 
                 face_down_cards.push(library_list.shift())
             }
+            $('.card').unbind('click').click((event) => {
+                $('body').append(`
+                    <div id='modal'>
+                        <div id='modal-content'>
+                            <h3>Discard this card?</h3>
+                            <input type='button' value="Yes" class="discard-yes discard-confirm">
+                            <input type='button' value="Cancel" class="cancel discard-confirm">
+                        </div>
+                    </div>
+                `)
+
+                $('.discard-confirm').click((confirmEvent) => {
+                    if ($(confirmEvent.target).hasClass('discard-yes')) {
+                        drawn_cards.forEach((card, index) => {
+                            if (card.name === $(event.target).attr('alt')) {
+                                discarded_cards = discarded_cards.concat(drawn_cards.splice(index, 1))
+                                return
+                            }
+                        })
+                        $(event.target).remove()
+                    }
+                    $('#modal').remove()
+                })
+            })
         })
     })
 
     $('#take-cards').click(() => {
         $('.drawn').not('.Mission').appendTo('#station-area')
-        $('.Mission').appendTo('#mission-area')
-        if ($('.Mission').size() > 1) {
-            $('#mission-area .Mission').last().remove()
+        $('#drawn-cards-area .Mission').appendTo('#mission-area')
+        if ($('#mission-area .Mission').size() > 1) {
+            drawn_cards.forEach((card, index) => {
+                if (card.name === $('#mission-area .Mission').first().attr('alt')) {
+                    discarded_cards = discarded_cards.concat(drawn_cards.splice(index, 1))
+                    return
+                }
+            })
+            $('#mission-area .Mission').first().remove()
         }
         $('.drawn').removeClass('drawn')
     })
