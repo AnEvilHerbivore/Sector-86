@@ -6,4 +6,4 @@ class RoomForm(forms.ModelForm):
 
     class Meta:
         model = Room
-        fields = ('name', 'user')
+        fields = ('name',)
