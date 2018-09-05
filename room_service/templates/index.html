@@ -26,12 +26,13 @@
             </form>
         {% endif %}
     </nav>
-
-    {% block content %}
-        <h1>Welcome to Sector 86</h1>
-        {% if user.is_authenticated %}
-            <p>Yup!</p>
-        {% endif %}
-    {% endblock %}
+    <div id='content'>
+        {% block content %}
+            <h1>Welcome to Sector 86</h1>
+            {% if user.is_authenticated %}
+                <p>Yup!</p>
+            {% endif %}
+        {% endblock %}
+    </div>
 </body>
 </html>

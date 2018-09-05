@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -22,7 +20,7 @@ def room_create(request):
 
         r = Room(
             name = form_data['name'],
-            user = User.objects.get(pk=form_data['user'])
+            user = request.user
         )
         r.save()
         return HttpResponseRedirect(f'/room/{r.id}')
