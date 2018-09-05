@@ -6,6 +6,7 @@ class Card(models.Model):
     name = models.CharField(max_length=30)
     image = models.FilePathField()
     quantity = models.IntegerField()
+    card_type = models.CharField(max_length=10, null=True)
 
 class Room(models.Model):
     name = models.CharField(max_length=255)

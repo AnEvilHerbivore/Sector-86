@@ -4,7 +4,7 @@ $.ajax('/card/').then(card_list => {
     let face_down_cards = []
     card_list.forEach(card => {
         for (i = 0; i < card.quantity; i++) {
-            library_list.push({'name': card.name, 'image': card.image})
+            library_list.push({'name': card.name, 'image': card.image, 'card_type': card.card_type})
         }
     })
     
@@ -24,23 +24,26 @@ $.ajax('/card/').then(card_list => {
 
         $('.confirm').click((e) => {
             $('#modal').remove()
-            // $('#content').append()
             if ($(e.target).hasClass('face-up')) {
-                $('#content').append(`
-                    <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/${library_list[0]["image"]}' alt='${library_list[0]["image"]}' />
+                $('#drawn-cards-area').append(`
+                    <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/${library_list[0]["image"]}' alt='${library_list[0]["name"]}' class="drawn card ${library_list[0]["card_type"]}" />
                 `)
                 library_list.shift()
             }
             else if ($(e.target).hasClass('face-down')) {
-                $('#content').append(`
-                    <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/card_images/CardBack.png' alt='Credit' />
+                $('#drawn-cards-area').append(`
+                    <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/card_images/CardBack.png' alt='Credit' class="drawn card" />
                 `)
-                console.log(library_list)
+
                 face_down_cards.push(library_list.shift())
-                console.log(library_list)
-                console.log(face_down_cards)
             }
         })
+    })
+
+    $('#take-cards').click(() => {
+        $('.drawn').not('.Mission').appendTo('#station-area')
+        $('.Mission').appendTo('#mission-area')
+        $('.drawn').removeClass('drawn')
     })
 })
 

@@ -24,3 +24,53 @@ img {
     border: 1px solid #888;
     width: 80%;
 }
+
+.drawn {
+    display: block;
+    margin-top: -250px;
+}
+
+.drawn:first-child {
+    margin-top: 0px;
+}
+
+.card{
+    position:relative;
+    border: solid black 1px;
+}
+
+.card:hover {
+    z-index: 3;
+}
+
+#play-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    height: 100%;
+}
+
+#play-area div {
+    min-width: 250px;
+    border: solid black 1px;
+}
+
+#draw-area {
+    flex-grow: 0;
+    align-content: center;
+}
+
+#station-area {
+    flex-grow: 6;
+}
+
+#mission-area {
+    flex-grow: 0;
+}
+
+#play-area #drawn-cards-area {
+    border: none;
+}
