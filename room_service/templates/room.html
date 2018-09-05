@@ -2,8 +2,23 @@
 {% load staticfiles %}
 {% block content %}
     <h1>{{current_room.name}}</h1>
-    <h3>Library</h3>
-    <img src="{% static 'card_images/CardBack.png' %}" id="library" alt="Library"/>
+    <div id="play-area">
+        <div id='draw-area'>
+            <h3>Library</h3>
+            <img src="{% static 'card_images/CardBack.png' %}" id="library" alt="Library"/>
+            <br />
+            <input type="button" value="Take Cards" id="take-cards" />
+            <div id='drawn-cards-area'>
+
+            </div>
+        </div>
+        <div id='station-area'>
+            <h3>Station</h3>
+        </div>
+        <div id='mission-area'>
+            <h3>Missions</h3>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'scripts/deck.js' %}"></script>
 {% endblock %}
