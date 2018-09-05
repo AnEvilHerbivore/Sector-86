@@ -43,6 +43,9 @@ $.ajax('/card/').then(card_list => {
     $('#take-cards').click(() => {
         $('.drawn').not('.Mission').appendTo('#station-area')
         $('.Mission').appendTo('#mission-area')
+        if ($('.Mission').size() > 1) {
+            $('#mission-area .Mission').last().remove()
+        }
         $('.drawn').removeClass('drawn')
     })
 })
