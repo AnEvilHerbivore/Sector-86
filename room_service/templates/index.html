@@ -15,7 +15,7 @@
                 <input type="submit" value="Logout">
             </form>
             <form action="{% url 'room_service:room_create' %}" method="get">
-                <input type="submit" value="Create Room">
+                <input type="submit" value="Create New Room">
             </form>
         {% else %}
             <form action="{% url 'room_service:login' %}" method="get">
