@@ -95,6 +95,19 @@ $.ajax('/card/').then(card_list => {
                     
                     $(event.target).appendTo('#station-area')
                     $(event.target).unbind('click')
+
+                    if ($('#station-area .Mission').size() >= 3) {
+                        $('body').append(`
+                            <div id='win-screen'>
+                                <h1>Congratulations! You won!</h1>
+                                <input type='button' value='Replay' id='replay-game'>
+                            </div>
+                        `)
+
+                        $('#replay-game').click(() => {
+                            location.reload()
+                        })
+                    }
                 }
                 $('#modal').remove()
             })
