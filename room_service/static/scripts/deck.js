@@ -39,7 +39,7 @@ $.ajax('/card/').then(card_list => {
 
                 face_down_cards.push(library_list.shift())
             }
-            $('.card').unbind('click').click((event) => {
+            $('.card').not('.Mission').unbind('click').click((event) => {
                 $('body').append(`
                     <div id='modal'>
                         <div id='modal-content'>
@@ -69,7 +69,7 @@ $.ajax('/card/').then(card_list => {
     $('#take-cards').click(() => {
         $('.drawn').not('.Mission').appendTo('#station-area')
         $('#drawn-cards-area .Mission').appendTo('#mission-area')
-        if ($('#mission-area .Mission').size() > 1) {
+        while ($('#mission-area .Mission').size() > 1) {
             drawn_cards.forEach((card, index) => {
                 if (card.name === $('#mission-area .Mission').first().attr('alt')) {
                     discarded_cards = discarded_cards.concat(drawn_cards.splice(index, 1))
@@ -79,6 +79,26 @@ $.ajax('/card/').then(card_list => {
             $('#mission-area .Mission').first().remove()
         }
         $('.drawn').removeClass('drawn')
+        $('#mission-area .Mission').unbind('click').click((event) => {
+            $('body').append(`
+                <div id='modal'>
+                    <div id='modal-content'>
+                        <h3>Do you have the resources to complete this mission?</h3>
+                        <input type='button' value="Yes" class="mission-complete-yes mission-complete-confirm">
+                        <input type='button' value="Cancel" class="cancel mission-complete-confirm">
+                    </div>
+                </div>
+            `)
+
+            $('.mission-complete-confirm').click(confirmEvent => {
+                if ($(confirmEvent.target).hasClass('mission-complete-yes')) {
+                    
+                    $(event.target).appendTo('#station-area')
+                    $(event.target).unbind('click')
+                }
+                $('#modal').remove()
+            })
+        })
     })
 })
 
