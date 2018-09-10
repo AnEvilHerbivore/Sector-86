@@ -2,23 +2,70 @@
 {% load staticfiles %}
 {% block content %}
     <h1>{{current_room.name}}</h1>
-    <p>Click on the library to start drawing cards. Click on a card to discard or complete missions or contracts.</p>
-    <p>For the rules, <a href="https://games.invincible.ink/sector86-rules.pdf" target="_blank">click here</a> </p>
-    <div id="play-area">
-        <div id='draw-area'>
-            <h3>Library</h3>
-            <img src="{% static 'card_images/CardBack.png' %}" id="library" alt="Library"/>
-            <br />
-            <input type="button" value="Take Cards" id="take-cards" />
-            <div id='drawn-cards-area'>
+    <div id='play-hints'>
+        <h5>Click on the library to start drawing cards. Click on a card to discard cards or complete missions or contracts.</h5>
+        <h5>For the rules, <a href="https://games.invincible.ink/sector86-rules.pdf" target="_blank">click here</a> <input type='button' value='Hide' id='hide-hints' /></h5>
+    </div>
+    <div id="card-area">
+        <div id="play-area">
+            <div id='draw-area' class='column'>
+                <h3>Library</h3>
+                <img src="{% static 'card_images/CardBack.png' %}" id="library" alt="Library"/>
+                <br />
+                <input type="button" value="Take Cards" id="take-cards" />
+                <br />
+                <div id='drawn-cards-area'>
 
+                </div>
+            </div>
+            <div id='station-area' class='column'>
+                <h3>Station</h3>
+                <div>
+                    <h4>Ships</h4>
+                    <div id='station-Ship-area'>
+
+                    </div>
+                </div>
+                <div>
+                    <h4>Crew</h4>
+                    <div id='station-Crew-area'>
+
+                    </div>
+                </div>
+                <div>
+                    <h4>Facilities</h4>
+                    <div id='station-Facility-area'>
+
+                    </div>
+                </div>
+                <div>
+                        <h4>Credits</h4>
+                        <div id='station-Credit-area'>
+    
+                        </div>
+                    </div>
+                <div>
+                        <h4>Levies</h4>
+                        <div id='station-Levy-area'>
+
+                        </div>
+                </div>
+                <div>
+                        <h4>Completed Missions</h4>
+                        <div id='station-Mission-area'>
+
+                        </div>
+                </div>
+            </div>
+            <div id='mission-area' class='column'>
+                <h3>Missions</h3>
             </div>
         </div>
-        <div id='station-area'>
-            <h3>Station</h3>
-        </div>
-        <div id='mission-area'>
-            <h3>Missions</h3>
+        <div id='discarded-area-parent'>
+            <h3>Discarded Cards</h3>
+            <div id='discard-area'>
+                
+            </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
