@@ -4,6 +4,12 @@ img {
     border-radius: 5px;
 }
 
+.card{
+    position:relative;
+    border: solid black 1px;
+    margin-top: 5px;
+}
+
 #modal {
     position: fixed;
     z-index: 2;
@@ -26,17 +32,14 @@ img {
 }
 
 .drawn {
-    display: block;
+    display: inline-block;
     margin-top: -250px;
+    width: 221px;
 }
 
 .drawn:first-child {
     margin-top: 0px;
-}
-
-.card{
-    position:relative;
-    border: solid black 1px;
+    margin-right: 0px;
 }
 
 .card:hover {
@@ -58,9 +61,29 @@ img {
     border: solid black 1px;
 }
 
+.column {
+    height: 500px;
+    overflow-y: auto;
+}
+
+#discarded-area-parent {
+    border: solid black 1px;
+    min-height: 380px;
+    overflow: auto;
+}
+
+#discard-area {
+    position: relative;
+    left: 180px;
+    display: inline-block;
+}
+
+#discard-area img {
+    margin-left: -180px;
+}
+
 #draw-area {
     flex-grow: 0;
-    align-content: center;
 }
 
 #station-area {
@@ -73,6 +96,13 @@ img {
 
 #play-area #drawn-cards-area {
     border: none;
+}
+
+#drawn-cards-area {
+    margin: 0px;
+    text-align: center;
+    padding: 0px;
+    border: 0px;
 }
 
 nav form {
@@ -88,4 +118,29 @@ nav form {
     height: 100%;
     overflow: auto;
     background-color: #fff;
+}
+
+#station-area div {
+    margin: 10px;
+    min-height: 320px;
+}
+
+#station-area div div {
+    border: none;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#card-area {
+    text-align: center;
+}
+
+h5 {
+    margin: 5px;
+}
+
+#hide-hints {
+    display: inline;
 }
