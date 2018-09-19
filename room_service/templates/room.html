@@ -1,9 +1,21 @@
 {% extends 'index.html' %}
 {% load staticfiles %}
 {% block content %}
-    <h1>{{current_room.name}}</h1>
+    <div id='header-info'> 
+        <div id='room-info'>
+            <h1>{{current_room.name}}</h1>
+            <h5>Room ID# <span id='room-id'>{{current_room.id}}</span></h5>
+        </div>
+        <div id='multiplayer-info'>
+        {% for user in current_users %}
+            <h4>Players:</h4>
+            <p>{{user.username}}</p>
+        {% endfor %}
+        <input type='button' id='show-opponent-area' value="Show Opponent's Station">
+        </div>
+    </div>   
     <div id='play-hints'>
-        <h5>Click on the library to start drawing cards. Click on a card to discard cards or complete missions or contracts.</h5>
+        <h5>Click on the library to start drawing cards or gaining credits. Click on a card to discard it or complete missions and contracts.</h5>
         <h5>For the rules, <a href="https://games.invincible.ink/sector86-rules.pdf" target="_blank">click here</a> <input type='button' value='Hide' id='hide-hints' /></h5>
     </div>
     <div id="card-area">
@@ -18,6 +30,11 @@
 
                 </div>
             </div>
+            <div id='credit-area' class='column'>
+                    <h3>Credits</h3>
+                    <div id='station-Credit-area'>
+                    </div>
+                </div>
             <div id='station-area' class='column'>
                 <h3>Station</h3>
                 <div>
@@ -39,22 +56,16 @@
                     </div>
                 </div>
                 <div>
-                        <h4>Credits</h4>
-                        <div id='station-Credit-area'>
-    
-                        </div>
-                    </div>
-                <div>
-                        <h4>Levies</h4>
-                        <div id='station-Levy-area'>
-
-                        </div>
-                </div>
-                <div>
                         <h4>Completed Missions</h4>
                         <div id='station-Mission-area'>
 
                         </div>
+                </div>
+            </div>
+            <div id='levy-area' class='column'>
+                <h3>Levies</h3>
+                <div id='station-Levy-area'>
+
                 </div>
             </div>
             <div id='mission-area' class='column'>
@@ -64,10 +75,65 @@
         <div id='discarded-area-parent'>
             <h3>Discarded Cards</h3>
             <div id='discard-area'>
-                
             </div>
         </div>
     </div>
+    <div id='opponent-area'>
+        <h1>Opponent Station</h1>
+        <input type='button' id='hide-opponent-area' value='Close' />
+        <div id="opponent-play-area">
+            <div id='opponent-draw-area' class='column'>
+                <h3>Drawn Cards</h3>
+                <div id='opponent-drawn-cards-area'>
+
+                </div>
+            </div>
+            <div id='opponent-credit-area' class='column'>
+                    <h3>Credits</h3>
+                    <div id='opponent-station-Credit-area'>
+                    </div>
+                </div>
+            <div id='opponent-station-area' class='column'>
+                <h3>Station</h3>
+                <div>
+                    <h4>Ships</h4>
+                    <div id='opponent-station-Ship-area'>
+
+                    </div>
+                </div>
+                <div>
+                    <h4>Crew</h4>
+                    <div id='opponent-station-Crew-area'>
+
+                    </div>
+                </div>
+                <div>
+                    <h4>Facilities</h4>
+                    <div id='opponent-station-Facility-area'>
+
+                    </div>
+                </div>
+                <div>
+                        <h4>Completed Missions</h4>
+                        <div id='opponent-station-Mission-area'>
+
+                        </div>
+                </div>
+            </div>
+            <div id='opponent-levy-area' class='column'>
+                <h3>Levies</h3>
+                <div id='opponent-station-Levy-area'>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script>
+        localStorage.setItem('user_id', '{{ user.id }}')
+        localStorage.setItem('user_name', '{{ user }}')
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'scripts/deck.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/bundle.js' %}"></script>
 {% endblock %}

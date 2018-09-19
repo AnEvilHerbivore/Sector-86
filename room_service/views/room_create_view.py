@@ -20,7 +20,7 @@ def room_create(request):
 
         r = Room(
             name = form_data['name'],
-            user = request.user
         )
         r.save()
+        r.users.add(request.user)
         return HttpResponseRedirect(f'/room/{r.id}')

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sector 86</title>
+    <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
@@ -16,6 +17,9 @@
             </form>
             <form action="{% url 'room_service:room_create' %}" method="get">
                 <input type="submit" value="Create New Room">
+            </form>
+            <form action="{% url 'room_service:room_join' %}" method="get">
+                    <input type="submit" value="Join Room">
             </form>
         {% else %}
             <form action="{% url 'room_service:login' %}" method="get">
