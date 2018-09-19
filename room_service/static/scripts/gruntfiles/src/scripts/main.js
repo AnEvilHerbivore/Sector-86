@@ -27,6 +27,16 @@ socket.onmessage = function(e) {
             <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/${recievedData.data.card_image}' alt='${recievedData.data.card_name}' type='${recievedData.data.card_type}' class="${recievedData.data.destination === 'drawn-cards-area' || recievedData.data.destination === 'station-Credit-area' && recievedData.data.card_type !== 'Mission' ? 'drawn ' : ''}card ${recievedData.data.card_type}"  id="${recievedData.data.card_id}"/>
             ${recievedData.data.destination === 'drawn-cards-area' || recievedData.data.destination === 'station-Credit-area' ? '<br />' : '' }
         `)
+        if (recievedData.data.card_type === 'Mission' && recievedData.data.origin === 'mission-area') {
+            $(`#mission-area .Mission[alt='${recievedData.data.card_name}']`).remove()
+        } else if (recievedData.data.origin === 'drawn-cards-area') {
+            $(`#opponent-drawn-cards-area .card[alt='${recievedData.data.card_name}']`).first().remove()
+        }
+
+        deck.library_list = recievedData.data.library
+        deck.face_down_cards = recievedData.data.face_down
+        deck.drawn_cards = recievedData.data.drawn
+        deck.discarded_cards = recievedData.data.discard
     } else if (recievedData.action === 'win') {
         $('body').append(`
             <div id='win-screen'>
@@ -37,8 +47,17 @@ socket.onmessage = function(e) {
         $('#replay-game').click(() => {
             location.reload()
         })
+    } else if (recievedData.action === 'discard') {
+        $(`#discard-area`).append(`
+            <img src='/Users/katherynford/workspace/Sector86/Sector86/room_service/static/${recievedData.data.card_image}' alt='${recievedData.data.card_name}' type='${recievedData.data.card_type}' class="${recievedData.data.destination === 'drawn-cards-area' || recievedData.data.destination === 'station-Credit-area' && recievedData.data.card_type !== 'Mission' ? 'drawn ' : ''}card ${recievedData.data.card_type}"  id="${recievedData.data.card_id}"/>
+        `)
+        $(`#opponent-${recievedData.data.origin} .card[alt='${recievedData.data.card_name}']`).first().remove()
+        console.log(recievedData)
+        deck.library_list = recievedData.data.library
+        deck.face_down_cards = recievedData.data.face_down
+        deck.drawn_cards = recievedData.data.drawn
+        deck.discarded_cards = recievedData.data.discard
     }
-        
 };
 
 // Handler to hide the hint box
@@ -69,13 +88,18 @@ $.ajax('/card/').then(card_list => {
 
     // When the take cards button is clicked, add the cards to the station in the appropriate area
     $('#take-cards').click(() => {
+        let array = $('#drawn-cards-area .card')
+        array.each((index) => {
+            let current_card = $(array[index])
+            sendMessage('card', current_card.attr('alt'), current_card.attr('type'), current_card.attr('id'), current_card.attr('image'), 'drawn-cards-area', `station-${current_card.attr('type')}-area`)
+        })
         $('#drawn-cards-area .Facility').appendTo('#station-Facility-area')
         $('#drawn-cards-area .Crew').appendTo('#station-Crew-area')
         $('#drawn-cards-area .Ship').appendTo('#station-Ship-area')
         $('#drawn-cards-area .Levy').appendTo('#station-Levy-area')
         $('#drawn-cards-area br').remove()
+        $('.drawn').not('.Credit').removeClass('drawn')
 
-        $('.drawn').removeClass('drawn')
     })
 })
 
