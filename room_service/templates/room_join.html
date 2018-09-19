@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% for room in rooms%}
+        <li><a href="{% url 'room_service:room_view' room.id %}">{{ room.name }}</a></li>
+    {% endfor %}
+{% endblock %}

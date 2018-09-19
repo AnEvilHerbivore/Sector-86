@@ -1,6 +1,6 @@
 img {
-    height: 300px;
-    width: 221px;
+    height: 250px;
+    width: 184px;
     border-radius: 5px;
 }
 
@@ -24,7 +24,7 @@ img {
 
 
 #modal-content {
-    background-color: #fefefe;
+    background-color: #afb1ad;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -33,8 +33,7 @@ img {
 
 .drawn {
     display: inline-block;
-    margin-top: -250px;
-    width: 221px;
+    margin-top: -200px;
 }
 
 .drawn:first-child {
@@ -46,7 +45,7 @@ img {
     z-index: 1;
 }
 
-#play-area {
+#play-area, #opponent-play-area {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -56,14 +55,15 @@ img {
     height: 100%;
 }
 
-#play-area div {
-    min-width: 250px;
+#play-area div, #opponent-play-area div {
+    min-width: 200px;
     border: solid black 1px;
 }
 
 .column {
-    height: 500px;
+    height: 580px;
     overflow-y: auto;
+    margin: 5px;
 }
 
 #discarded-area-parent {
@@ -79,26 +79,26 @@ img {
 }
 
 #discard-area img {
-    margin-left: -180px;
+    margin-left: -160px;
 }
 
-#draw-area {
+#draw-area, #opponent-draw-area {
     flex-grow: 0;
 }
 
-#station-area {
+#station-area, #opponent-station-area {
     flex-grow: 6;
 }
 
-#mission-area {
+#mission-area, #opponent-mission-area {
     flex-grow: 0;
 }
 
-#play-area #drawn-cards-area {
+#play-area #drawn-cards-area, #opponent-play-area #opponent-drawn-cards-area {
     border: none;
 }
 
-#drawn-cards-area {
+#drawn-cards-area, #opponent-drawn-cards-area {
     margin: 0px;
     text-align: center;
     padding: 0px;
@@ -117,15 +117,15 @@ nav form {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: #fff;
+    background-color: #084d9a;
 }
 
-#station-area div {
+#station-area div, #opponent-station-area div {
     margin: 10px;
     min-height: 320px;
 }
 
-#station-area div div {
+#station-area div div, #opponent-station-area div div {
     border: none;
     display:flex;
     flex-direction: row;
@@ -133,14 +133,79 @@ nav form {
     justify-content: space-around;
 }
 
-#card-area {
+#credit-area div, #opponent-credit-area div {
+    border: none;
+}
+
+#card-area, #opponent-area {
     text-align: center;
 }
 
-h5 {
+#play-hints h5 {
     margin: 5px;
+}
+
+#play-hints{
+    margin: 10px;
 }
 
 #hide-hints {
     display: inline;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+h5 {
+    margin: 0px;
+}
+
+#levy-area #station-Levy-area {
+    border: none;
+}
+
+#card-area div, #opponent-area div {
+    border-radius: 20px;
+}
+
+#card-area div, #opponent-area div {
+    background-color: #afb1ad;
+}
+
+#content #play-area, #content #opponent-play-area {
+    background-color: #084d9a;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #084d9a;
+    color: #e2cf5e;
+    font-family: 'Aldrich';
+}
+
+#content {
+    text-shadow: 1px 1px #000000;
+}
+
+#opponent-area {
+    display: none;
+    position: fixed;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #084d9a;
+}
+
+#header-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
