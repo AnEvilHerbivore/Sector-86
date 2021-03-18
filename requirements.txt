@@ -6,7 +6,7 @@ django-seed==0.1.9
 djangorestframework==3.8.2
 Faker==0.8.17
 Markdown==2.6.11
-Pillow==5.2.0
+Pillow==8.1.1
 python-dateutil==2.7.3
 pytz==2018.5
 six==1.11.0
